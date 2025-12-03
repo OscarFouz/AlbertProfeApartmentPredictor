@@ -1,4 +1,4 @@
 package com.example.apartment_predictor;
 
-public class Post {
+public class Review {
 }
