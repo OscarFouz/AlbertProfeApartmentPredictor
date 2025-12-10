@@ -169,8 +169,10 @@ public class Apartment {
     private String mainroad;
     private String guestroom;
     private String basement;
-    private String hotwater;
-    private String heating;
+    // refactor both fiels to one
+    private String hotwaterheating;
+    //private String hotwater;
+    //private String heating;
     private String airconditioning;
     private Integer parking;
     private String prefarea;
@@ -277,7 +279,7 @@ This provides basic `CRUD` (Create, Read, Update, Delete) operations for the `Ap
 
 > The repository serves as the data access layer for apartment-related operations in the apartment predictor application.
 
-### Command LIne Runner
+### Command Line Runner
 
 > The [ApartmentPredictorApplication](cci:2://file:///home/albert/MyProjects/Sandbox/ApartmentPredictorProject/ApartmentPredictor/src/main/java/com/example/apartment_predictor/ApartmentPredictorApplication.java:9:0-126:1) implements `CommandLineRunner`, which <mark>executes code after the Spring Boot application starts</mark>. 
 
@@ -300,69 +302,69 @@ public class ApartmentPredictorApplication implements CommandLineRunner {
     private ApartmentRepository apartmentRepository;
 
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApartmentPredictorApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ApartmentPredictorApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
-		System.out.println("Creating apartment objects...");
-		
-		// Create apartment objects based on your sample data
-		Apartment apartment1 = new Apartment(
-				13300000L,    // price
-				7420,         // area
-				4,            // bedrooms
-				2,            // bathrooms
-				3,            // stories
-				"yes",        // mainroad
-				"no",         // guestroom
-				"no",         // basement
-				"no",         // hotwater
-				"yes",        // heating
-				"yes",        // airconditioning
-				2,            // parking
-				"yes",        // prefarea
-				"furnished"   // furnishingstatus
-		);
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("Creating apartment objects...");
+
+        // Create apartment objects based on your sample data
+        Apartment apartment1 = new Apartment(
+                13300000L,    // price
+                7420,         // area
+                4,            // bedrooms
+                2,            // bathrooms
+                3,            // stories
+                "yes",        // mainroad
+                "no",         // guestroom
+                "no",         // basement
+                "no",         // hotwater
+                "yes",        // heating
+                "yes",        // airconditioning
+                2,            // parking
+                "yes",        // prefarea
+                "furnished"   // furnishingstatus
+        );
 
 
-		
-		// Create additional sample apartments
-		Apartment apartment2 = new Apartment(
-				8500000L,     // price
-				5200,         // area
-				3,            // bedrooms
-				2,            // bathrooms
-				2,            // stories
-				"yes",        // mainroad
-				"yes",        // guestroom
-				"no",         // basement
-				"yes",        // hotwater
-				"no",         // heating
-				"yes",        // airconditioning
-				1,            // parking
-				"no",         // prefarea
-				"semi-furnished" // furnishingstatus
-		);
-		
-		Apartment apartment3 = new Apartment(
-				6200000L,     // price
-				3800,         // area
-				2,            // bedrooms
-				1,            // bathrooms
-				1,            // stories
-				"no",         // mainroad
-				"no",         // guestroom
-				"yes",        // basement
-				"yes",        // hotwater
-				"no",         // heating
-				"no",         // airconditioning
-				0,            // parking
-				"yes",        // prefarea
-				"unfurnished" // furnishingstatus
-		);
-		
+
+        // Create additional sample apartments
+        Apartment apartment2 = new Apartment(
+                8500000L,     // price
+                5200,         // area
+                3,            // bedrooms
+                2,            // bathrooms
+                2,            // stories
+                "yes",        // mainroad
+                "yes",        // guestroom
+                "no",         // basement
+                "yes",        // hotwater
+                "no",         // heating
+                "yes",        // airconditioning
+                1,            // parking
+                "no",         // prefarea
+                "semi-furnished" // furnishingstatus
+        );
+
+        Apartment apartment3 = new Apartment(
+                6200000L,     // price
+                3800,         // area
+                2,            // bedrooms
+                1,            // bathrooms
+                1,            // stories
+                "no",         // mainroad
+                "no",         // guestroom
+                "yes",        // basement
+                "yes",        // hotwater
+                "no",         // heating
+                "no",         // airconditioning
+                0,            // parking
+                "yes",        // prefarea
+                "unfurnished" // furnishingstatus
+        );
+
         apartmentRepository.save(apartment1);
         apartmentRepository.save(apartment2);
         apartmentRepository.save(apartment3);
@@ -376,11 +378,10 @@ public class ApartmentPredictorApplication implements CommandLineRunner {
         }
 
         //apartmentRepository.findAll().forEach(System.out::println);
-	}
-	
-	
-}
+    }
 
+
+}
 ```
 
 ### Tests JUnit
@@ -465,11 +466,17 @@ Database Dialect and DDL
 - **`spring.jpa.show-sql=true`** - Enables SQL query logging for debugging
 - **`spring.jpa.hibernate.ddl-auto=update`** - Automatically updates database schema without dropping existing data (safer than `create` which recreates tables)
 
+### DDL - Data Definition Language
+
 > **DDL - Data Definition Language**
 > 
 > <mark>DDL (Data Definition Language)</mark> consists of SQL commands that can be used for defining, altering and deleting database structures such as tables, indexes and schemas. It simply deals with descriptions of the database schema and is used to create and modify the structure of database objects in the database
 
 ![](https://raw.githubusercontent.com/AlbertProfe/ApartmentPredictor/refs/heads/master/docs/diagrams/sql-env.jpg)
+
+### Populate DB
+
+- [ImportCSVtoH2](https://github.com/AlbertProfe/ApartmentPredictor/blob/master/docs/appends/ImportCSVtoH2.md)
 
 ## Maven
 
@@ -574,7 +581,7 @@ Database Dialect and DDL
 
 - Java 21 (or 25, 17, 11, 8) <mark>open-jdk</mark>
 
-- JUniit 3.8.1
+- <mark>JUniit 3.8.1</mark>
 
 - Create project by <mark>Sprint Init</mark>
   
